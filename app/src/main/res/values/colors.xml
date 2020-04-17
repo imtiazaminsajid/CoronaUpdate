@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#8D8D8D</color>
+    <color name="colorPrimaryText">#202020</color>
+    <color name="colorSecondaryText">#8D8D8D</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="switch_orange">#fca903</color>
+    <color name="border_yellow">#E1B57B</color>
+    <color name="switch_grey">#bac2c1</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#202020</color>
+    <color name="magenta">#5E3A48</color>
+    <color name="facebook_blue">#3C5A9A</color>
+    <color name="stop_green">#25B572</color>
+    <color name="switch_green">#32B86C</color>
+    <color name="theme_green">#189F96</color>
+    <color name="mushaf_medina_1_theme">#076452</color>
+    <color name="button_red">#FF6079</color>
+    <color name="light_gray">#F6F6F6</color>
+    <color name="gray_">#D9D9D9</color>
+    <color name="dark_grey">#D0D0D0</color>
+    <color name="horizontal_line_color">#EFEFEF</color>
+    <color name="transparent">#80000000</color>
+    <color name="black">#202020</color>
+    <color name="transparent30">#30ffffff</color>
+
+    <color name="tajweed_green">#00A650</color>
+    <color name="tajweed_orange">#FF8C00</color>
+    <color name="tajweed_light_green">#80c865</color>
+    <color name="tajweed_purple">#9D48A1</color>
+    <color name="tajweed_yellow">#F5C000</color>
+    <color name="tajweed_blue">#2C96FF</color>
+    <color name="tajweed_red">#ff0000</color>
+    <color name="tajweed_silver">#AAAAAA</color>
+
+
+    <color name="download_button_yellow">#E8CA00</color>
+
+    //shimmer
+    <color name="background">#dddddd</color>
+</resources>
