@@ -18,11 +18,17 @@ import android.view.animation.AnimationUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.imtiazaminsajid.coronaupdate.Adapter.ViewPagerAdapter;
 import com.imtiazaminsajid.coronaupdate.Fragments.BangladeshDetailFragment;
+import com.imtiazaminsajid.coronaupdate.Fragments.CoronaHotLineFragment;
+import com.imtiazaminsajid.coronaupdate.Fragments.LastSevenDaysFragment;
+import com.imtiazaminsajid.coronaupdate.Fragments.PreventCoronavirusFragment;
 import com.imtiazaminsajid.coronaupdate.Fragments.TotalWorldUpdateFragment;
 import com.imtiazaminsajid.coronaupdate.Model.BangladeshAllDataModel;
+import com.imtiazaminsajid.coronaupdate.Model.WorldAllCountryModel;
 import com.imtiazaminsajid.coronaupdate.api_interface.ApiDataInterface;
+import com.imtiazaminsajid.coronaupdate.api_interface.WorldCountryDataInterface;
 import com.imtiazaminsajid.coronaupdate.databinding.ActivityMainBinding;
 import com.imtiazaminsajid.coronaupdate.utils.ApiClient;
+import com.imtiazaminsajid.coronaupdate.utils.ApiClintForWorldCountry;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     BangladeshAllDataModel bangladeshAllDataModel;
 
+    WorldAllCountryModel worldAllCountryModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +53,16 @@ public class MainActivity extends AppCompatActivity {
         intializeToolbar();
         setAdapter();
 
-        getDataFromApi();
+//        getWorldCountryDataFromApi();
     }
 
     public void setAdapter(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this.getSupportFragmentManager());
         viewPagerAdapter.addFragment(BangladeshDetailFragment.getInstance(), "Bangladesh");
+        viewPagerAdapter.addFragment(LastSevenDaysFragment.getInstance(), "BD Statistics");
         viewPagerAdapter.addFragment(TotalWorldUpdateFragment.getInstance(), "Worldwide");
+        viewPagerAdapter.addFragment(PreventCoronavirusFragment.getInstance(), "Prevent");
+        viewPagerAdapter.addFragment(CoronaHotLineFragment.getInstance(), "Hotline");
 
         activityMainBinding.viewpager.setSaveFromParentEnabled(false);
         activityMainBinding.viewpager.setAdapter(viewPagerAdapter);
@@ -109,5 +120,34 @@ public class MainActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void getWorldCountryDataFromApi(){
+
+        retrofit =  ApiClintForWorldCountry.getRetrofitInstance();
+        WorldCountryDataInterface worldCountryDataInterface = retrofit.create(WorldCountryDataInterface.class);
+        Call call = worldCountryDataInterface.getAllWorldCountryCoronaData();
+        call.enqueue(new Callback<WorldAllCountryModel>() {
+            @Override
+            public void onResponse(Call<WorldAllCountryModel> call, Response<WorldAllCountryModel> response) {
+
+                Log.d("apiworld", "code for world "+response.code());
+
+                if (response.isSuccessful()) {
+                    worldAllCountryModel = new WorldAllCountryModel();
+                    worldAllCountryModel = response.body();
+//                    setAdapter();
+//                    setOtherData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WorldAllCountryModel> call, Throwable t) {
+
+                Log.d("apiworld", "code for world failed "+t.getMessage());
+
+            }
+        });
+
     }
 }

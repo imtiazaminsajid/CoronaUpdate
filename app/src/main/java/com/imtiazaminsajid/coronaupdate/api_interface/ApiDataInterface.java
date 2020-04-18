@@ -1,6 +1,5 @@
 package com.imtiazaminsajid.coronaupdate.api_interface;
 
-
 import com.imtiazaminsajid.coronaupdate.Model.BangladeshAllDataModel;
 
 import retrofit2.Call;
