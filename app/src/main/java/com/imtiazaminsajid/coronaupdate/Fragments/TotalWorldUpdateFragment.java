@@ -41,6 +41,8 @@ public class TotalWorldUpdateFragment extends Fragment {
 
     WorldCountryCoronaAdapter worldCountryCoronaAdapter;
 
+    List<WorldDatumModel> worldDatumModels = new ArrayList<>();
+
     FragmentTotalWorldUpdateBinding fragmentTotalWorldUpdateBinding;
 
     View view;
@@ -54,19 +56,24 @@ public class TotalWorldUpdateFragment extends Fragment {
         fragmentTotalWorldUpdateBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_total_world_update, container, false);
         view = fragmentTotalWorldUpdateBinding.getRoot();
 
+        setAdapter();
         getWorldCountryDataFromApi();
 
         fragmentTotalWorldUpdateBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                filterData(query,worldAllCountryModel.getData());
+                if (worldAllCountryModel.getData()!=null) {
+                    filterData(query, worldAllCountryModel.getData());
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterData(newText,worldAllCountryModel.getData());
+                if (worldAllCountryModel.getData()!=null) {
+                    filterData(newText, worldAllCountryModel.getData());
+                }
                 return false;
             }
         });
@@ -98,9 +105,10 @@ public class TotalWorldUpdateFragment extends Fragment {
                     worldAllCountryModel = response.body();
 
 //                    worldCountryCoronaAdapter.notifyDataSetChanged();
-                    setAdapter();
-                    worldCountryCoronaAdapter.notifyDataSetChanged();
-                    worldCountryCoronaAdapter.setWorldDatumModels(worldAllCountryModel.getData());
+                    if (worldAllCountryModel!=null) {
+//                        worldCountryCoronaAdapter.notifyDataSetChanged();
+                        worldCountryCoronaAdapter.setWorldDatumModels(worldAllCountryModel.getData());
+                    }
                 }
             }
 
@@ -114,7 +122,7 @@ public class TotalWorldUpdateFragment extends Fragment {
 
     public void setAdapter() {
         layoutManager = new LinearLayoutManager(getContext());
-        worldCountryCoronaAdapter = new WorldCountryCoronaAdapter(getContext(), worldAllCountryModel.getData());
+        worldCountryCoronaAdapter = new WorldCountryCoronaAdapter(getContext(), worldDatumModels);
         fragmentTotalWorldUpdateBinding.worldCountryRecycleView.setLayoutManager(layoutManager);
         fragmentTotalWorldUpdateBinding.worldCountryRecycleView.setAdapter(worldCountryCoronaAdapter);
     }

@@ -49,13 +49,13 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
             WorldCountryViewHolder mHolder = (WorldCountryViewHolder) holder;
             if (worldDatumModels !=null) {
                 mHolder.world_country_name.setText("" + worldDatumModels.get(position).getCountryName());
-                mHolder.total_cases.setText("" + worldDatumModels.get(position).getTotalCases().toString());
-                mHolder.new_cases.setText("" + worldDatumModels.get(position).getNewCases().toString());
-                mHolder.total_death.setText("" + worldDatumModels.get(position).getTotalDeath().toString());
-                mHolder.new_death.setText("" + worldDatumModels.get(position).getNewDeath().toString());
-                mHolder.total_recovered.setText("" + worldDatumModels.get(position).getTotalRecovered().toString());
-                mHolder.active_cases.setText("" + worldDatumModels.get(position).getActiveCases().toString());
-//                mHolder.critical_cases.setText("" + worldAllCountryModel.getData().get(position).getCriticalCases().toString());
+                mHolder.total_cases.setText("" + worldDatumModels.get(position).getTotalCases());
+                mHolder.new_cases.setText("" + worldDatumModels.get(position).getNewCases());
+                mHolder.total_death.setText("" + worldDatumModels.get(position).getTotalDeath());
+                mHolder.new_death.setText("" + worldDatumModels.get(position).getNewDeath());
+                mHolder.total_recovered.setText("" + worldDatumModels.get(position).getTotalRecovered());
+                mHolder.active_cases.setText("" + worldDatumModels.get(position).getActiveCases());
+                mHolder.critical_cases.setText("" + worldDatumModels.get(position).getCriticalCases());
             }
         }
     }
@@ -88,7 +88,7 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
             new_death = itemView.findViewById(R.id.new_death);
             total_recovered = itemView.findViewById(R.id.total_recovered);
             active_cases = itemView.findViewById(R.id.active_cases);
-//            critical_cases = itemView.findViewById(R.id.critical_cases);
+            critical_cases = itemView.findViewById(R.id.critical_cases);
         }
     }
 

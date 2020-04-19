@@ -10,13 +10,16 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.imtiazaminsajid.coronaupdate.Adapter.ViewPagerAdapter;
+import com.imtiazaminsajid.coronaupdate.Fragments.AboutUsFragment;
 import com.imtiazaminsajid.coronaupdate.Fragments.BangladeshDetailFragment;
 import com.imtiazaminsajid.coronaupdate.Fragments.CoronaHotLineFragment;
 import com.imtiazaminsajid.coronaupdate.Fragments.LastSevenDaysFragment;
@@ -38,9 +41,10 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding activityMainBinding;
-    FragmentManager fm;
 
     private Retrofit retrofit;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     BangladeshAllDataModel bangladeshAllDataModel;
 
@@ -52,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         intializeToolbar();
         setAdapter();
-
-//        getWorldCountryDataFromApi();
     }
 
     public void setAdapter(){
@@ -61,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(BangladeshDetailFragment.getInstance(), "Bangladesh");
         viewPagerAdapter.addFragment(LastSevenDaysFragment.getInstance(), "BD Statistics");
         viewPagerAdapter.addFragment(TotalWorldUpdateFragment.getInstance(), "Worldwide");
-        viewPagerAdapter.addFragment(PreventCoronavirusFragment.getInstance(), "Prevent");
         viewPagerAdapter.addFragment(CoronaHotLineFragment.getInstance(), "Hotline");
+        viewPagerAdapter.addFragment(PreventCoronavirusFragment.getInstance(), "Prevent");
+        viewPagerAdapter.addFragment(AboutUsFragment.getInstance(), "About us");
 
         activityMainBinding.viewpager.setSaveFromParentEnabled(false);
         activityMainBinding.viewpager.setAdapter(viewPagerAdapter);
@@ -88,6 +91,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     private void getDataFromApi(){

@@ -90,12 +90,14 @@ public class LastSevenDaysFragment extends Fragment {
                         bangladeshAllDataModel = new BangladeshAllDataModel();
                         bangladeshAllDataModel = response.body();
 
-                        agesPieChart();
-                        confirmedPieChart();
-                        recoveredPieChart();
-                        deathsPieChart();
+                        if (bangladeshAllDataModel!=null) {
+                            setAllData();
 
-                        setAllData();
+                            confirmedPieChart();
+                            recoveredPieChart();
+                            deathsPieChart();
+                            agesPieChart();
+                        }
                     }
                 }
 

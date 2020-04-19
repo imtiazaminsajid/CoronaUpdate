@@ -13,10 +13,9 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             app:queryHint="Search country.."
-            app:iconifiedByDefault="false"
+            android:layoutDirection="rtl"
+            app:iconifiedByDefault="true"
 
             />
 

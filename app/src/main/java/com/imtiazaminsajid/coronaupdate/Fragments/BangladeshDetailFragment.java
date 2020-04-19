@@ -63,6 +63,8 @@ public class BangladeshDetailFragment extends Fragment {
 
     BangladeshAllDataModel bangladeshAllDataModel;
 
+    List<DistrictModel> districtModels = new ArrayList<>();
+
     View view;
 
     public BangladeshDetailFragment() {
@@ -77,18 +79,26 @@ public class BangladeshDetailFragment extends Fragment {
         view = fragmentBangladeshDetailBinding.getRoot();
 
 
+        setAdapter();
         getDataFromApi();
+
+        Animation animation  = AnimationUtils.loadAnimation(getContext(), R.anim.blink_anim);
+        fragmentBangladeshDetailBinding.lastUpdatedData.startAnimation(animation);
 
         fragmentBangladeshDetailBinding.searchViewDistrict.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                filterData(query,bangladeshAllDataModel.getDistricts());
+                if (bangladeshAllDataModel.getDistricts()!=null) {
+                    filterData(query, bangladeshAllDataModel.getDistricts());
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterData(newText,bangladeshAllDataModel.getDistricts());
+                if (bangladeshAllDataModel.getDistricts()!=null) {
+                    filterData(newText, bangladeshAllDataModel.getDistricts());
+                }
                 return false;
             }
         });
@@ -104,7 +114,7 @@ public class BangladeshDetailFragment extends Fragment {
 
     public void setAdapter() {
         layoutManager = new LinearLayoutManager(getContext());
-        districtDetailsAdapter = new DistrictDetailsAdapter(getContext(), bangladeshAllDataModel.getDistricts());
+        districtDetailsAdapter = new DistrictDetailsAdapter(getContext(), districtModels);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setLayoutManager(layoutManager);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setAdapter(districtDetailsAdapter);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setNestedScrollingEnabled(false);
@@ -119,26 +129,7 @@ public class BangladeshDetailFragment extends Fragment {
         fragmentBangladeshDetailBinding.todayDeaths.setText("" + bangladeshAllDataModel.getToday().getTodayDeaths());
         fragmentBangladeshDetailBinding.todayRecovered.setText("" + bangladeshAllDataModel.getToday().getTodayRecovered());
 
-
-//        DateFormat format = new SimpleDateFormat("MMMM d, yyyy h:mm a");
-//        Date date = new Date();
-//        try {
-//            date = format.parse(bangladeshAllDataModel.getLastUpdate());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
-        Animation animation  = AnimationUtils.loadAnimation(getContext(), R.anim.blink_anim);
-        fragmentBangladeshDetailBinding.lastUpdatedData.startAnimation(animation);
-
         fragmentBangladeshDetailBinding.lastUpdatedData.setText("Last updated data: " + bangladeshAllDataModel.getLastUpdate());
-
-
-//        try {
-//            fragmentBangladeshDetailBinding.lastUpdatedData.setText("Last updated data: "+format.parse(bangladeshAllDataModel.getLastUpdate()));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
 
     }
@@ -146,8 +137,6 @@ public class BangladeshDetailFragment extends Fragment {
     private void getDataFromApi() {
 
         if (Utils.checkInternetConnection(getContext())) {
-
-
             retrofit = ApiClient.getRetrofitInstance();
             ApiDataInterface apiDataInterface = retrofit.create(ApiDataInterface.class);
             Call call = apiDataInterface.getAllBangladeshCoronaData();
@@ -161,10 +150,13 @@ public class BangladeshDetailFragment extends Fragment {
 //                        fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.GONE);
                         bangladeshAllDataModel = new BangladeshAllDataModel();
                         bangladeshAllDataModel = response.body();
-                        setAdapter();
-                        agesPieChart();
+
 //                        agesVennChart();
-                        setOtherData();
+                        if (bangladeshAllDataModel!=null){
+                            districtDetailsAdapter.setDistrictModels(bangladeshAllDataModel.getDistricts());
+                            agesPieChart();
+                            setOtherData();
+                        }
                     }
                 }
 

@@ -51,10 +51,12 @@ public class DistrictDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         if (holder instanceof DistrictViewHolder) {
             DistrictViewHolder mHolder = (DistrictViewHolder) holder;
-            mHolder.index.setText(""+districtModels.get(position).getId());
-            mHolder.districtName.setText(""+districtModels.get(position).getName());
-            mHolder.districtTotalConfirmed.setText(""+districtModels.get(position).getConfirmed());
-            mHolder.districtTotalDeath.setText(""+districtModels.get(position).getDeaths());
+            if (districtModels!=null) {
+                mHolder.index.setText("" + districtModels.get(position).getId());
+                mHolder.districtName.setText("" + districtModels.get(position).getName());
+                mHolder.districtTotalConfirmed.setText("" + districtModels.get(position).getConfirmed());
+                mHolder.districtTotalDeath.setText("" + districtModels.get(position).getDeaths());
+            }
         }
     }
 

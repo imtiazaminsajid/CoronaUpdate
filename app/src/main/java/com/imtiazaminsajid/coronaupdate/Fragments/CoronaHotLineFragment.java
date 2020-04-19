@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.imtiazaminsajid.coronaupdate.R;
 import com.imtiazaminsajid.coronaupdate.databinding.FragmentCoronaHotLineBinding;
@@ -48,6 +50,13 @@ public class CoronaHotLineFragment extends Fragment {
         view = fragmentCoronaHotLineBinding.getRoot();
 
         makeCall();
+
+        Animation animation  = AnimationUtils.loadAnimation(getContext(), R.anim.blink_anim);
+        fragmentCoronaHotLineBinding.iedcrIcon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.healthCenterIcon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.healthLineIcon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.nationalCallCenterIcon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.nationalHelplineIcon.startAnimation(animation);
 
         return view;
     }

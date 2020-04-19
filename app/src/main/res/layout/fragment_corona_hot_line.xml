@@ -23,7 +23,6 @@
             app:cardMaxElevation="5dp">
 
             <RelativeLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -53,6 +52,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/national_call_center_Icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/phone"
@@ -111,6 +111,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/health_center_Icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/phone"
@@ -169,6 +170,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/iedcr_Icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/phone"
@@ -227,6 +229,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/healthLine_Icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/phone"
@@ -284,6 +287,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/national_helpline_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/phone"
