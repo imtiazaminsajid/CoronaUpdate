@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SplashScreenActivity">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/swapno_logo"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="স্বপ্ন-এক চিলতে হাসির জন্যে"
+            android:textSize="17sp"
+            android:fontFamily="@font/muli_semibold"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/image"
+            android:layout_marginTop="20dp"
+            />
+
+<!--        <ProgressBar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            style="?android:attr/progressBarStyleHorizontal"-->
+<!--            android:indeterminate="true"-->
+<!--            android:indeterminateTint="@color/magenta"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            />-->
+
+    </RelativeLayout>
+
+</layout>
