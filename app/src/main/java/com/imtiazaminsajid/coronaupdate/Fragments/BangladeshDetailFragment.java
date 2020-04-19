@@ -144,8 +144,6 @@ public class BangladeshDetailFragment extends Fragment {
                 @Override
                 public void onResponse(Call<BangladeshAllDataModel> call, Response<BangladeshAllDataModel> response) {
 
-                    Log.d("api", "code " + response.code());
-
                     if (response.isSuccessful()) {
 //                        fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.GONE);
                         bangladeshAllDataModel = new BangladeshAllDataModel();
@@ -267,8 +265,6 @@ public class BangladeshDetailFragment extends Fragment {
                 filteredModelList.add(model);
             }
         }
-
-        //calling a method of the adapter class and passing the filtered list
         districtDetailsAdapter.setDistrictModels(filteredModelList);
     }
 }

@@ -95,21 +95,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            finishAffinity();
-            return;
+
+        if ( ((TabLayout) activityMainBinding.toolbar.findViewById(R.id.tab_layout)).getSelectedTabPosition()==0){
+            if (doubleBackToExitPressedOnce) {
+                finishAffinity();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            ((TabLayout) activityMainBinding.toolbar.findViewById(R.id.tab_layout)).setScrollPosition(0,0f,true);
+            activityMainBinding.viewpager.setCurrentItem(0);
         }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
     }
 
     private void getDataFromApi(){
