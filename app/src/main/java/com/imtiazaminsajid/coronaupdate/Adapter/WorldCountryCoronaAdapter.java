@@ -10,16 +10,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imtiazaminsajid.coronaupdate.Model.WorldAllCountryModel;
+import com.imtiazaminsajid.coronaupdate.Model.WorldDatumModel;
 import com.imtiazaminsajid.coronaupdate.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    WorldAllCountryModel worldAllCountryModel;
+    List<WorldDatumModel> worldDatumModels = new ArrayList<>();
 
-    public WorldCountryCoronaAdapter(Context context, WorldAllCountryModel worldAllCountryModel) {
+    public List<WorldDatumModel> getWorldDatumModels() {
+        return worldDatumModels;
+    }
+
+    public void setWorldDatumModels(List<WorldDatumModel> worldDatumModels) {
+        this.worldDatumModels = worldDatumModels;
+        notifyDataSetChanged();
+    }
+
+    public WorldCountryCoronaAdapter(Context context, List<WorldDatumModel> worldDatumModels) {
         this.context = context;
-        this.worldAllCountryModel = worldAllCountryModel;
+        this.worldDatumModels = worldDatumModels;
     }
 
     @NonNull
@@ -34,14 +47,14 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof WorldCountryViewHolder) {
             WorldCountryViewHolder mHolder = (WorldCountryViewHolder) holder;
-            if (worldAllCountryModel!=null) {
-                mHolder.world_country_name.setText("" + worldAllCountryModel.getData().get(position).getCountryName());
-                mHolder.total_cases.setText("" + worldAllCountryModel.getData().get(position).getTotalCases().toString());
-                mHolder.new_cases.setText("" + worldAllCountryModel.getData().get(position).getNewCases().toString());
-                mHolder.total_death.setText("" + worldAllCountryModel.getData().get(position).getTotalDeath().toString());
-                mHolder.new_death.setText("" + worldAllCountryModel.getData().get(position).getNewDeath().toString());
-                mHolder.total_recovered.setText("" + worldAllCountryModel.getData().get(position).getTotalRecovered().toString());
-                mHolder.active_cases.setText("" + worldAllCountryModel.getData().get(position).getActiveCases().toString());
+            if (worldDatumModels !=null) {
+                mHolder.world_country_name.setText("" + worldDatumModels.get(position).getCountryName());
+                mHolder.total_cases.setText("" + worldDatumModels.get(position).getTotalCases().toString());
+                mHolder.new_cases.setText("" + worldDatumModels.get(position).getNewCases().toString());
+                mHolder.total_death.setText("" + worldDatumModels.get(position).getTotalDeath().toString());
+                mHolder.new_death.setText("" + worldDatumModels.get(position).getNewDeath().toString());
+                mHolder.total_recovered.setText("" + worldDatumModels.get(position).getTotalRecovered().toString());
+                mHolder.active_cases.setText("" + worldDatumModels.get(position).getActiveCases().toString());
 //                mHolder.critical_cases.setText("" + worldAllCountryModel.getData().get(position).getCriticalCases().toString());
             }
         }
@@ -49,8 +62,16 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return worldAllCountryModel.getData().size();
+
+//        if(worldAllCountryModel.getData() != null){
+//            return worldDatumModelsFiltered.size();
+//        } else {
+//            return 0;
+//        }
+
+        return worldDatumModels.size();
     }
+
 
     public class WorldCountryViewHolder extends RecyclerView.ViewHolder {
 
@@ -70,4 +91,6 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
 //            critical_cases = itemView.findViewById(R.id.critical_cases);
         }
     }
+
+
 }

@@ -313,11 +313,12 @@
                 android:id="@+id/lastUpdatedData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:text="Last updated data: "/>
+                android:text="Last updated data: "
+                android:textColor="@color/tajweed_red"
+                android:textSize="10sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -346,6 +347,15 @@
             <!--            android:layout_marginTop="10dp"-->
             <!--            android:layout_marginBottom="10dp"-->
             <!--            android:text="Data according to districts"/>-->
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchViewDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:queryHint="Search District.."
+                app:iconifiedByDefault="false"
+                android:layout_marginBottom="4dp"
+                />
 
             <include
                 layout="@layout/district_details_first_item"

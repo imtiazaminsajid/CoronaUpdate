@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.anychart.APIlib;
@@ -29,6 +30,7 @@ import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
 import com.imtiazaminsajid.coronaupdate.Adapter.DistrictDetailsAdapter;
 import com.imtiazaminsajid.coronaupdate.Model.BangladeshAllDataModel;
+import com.imtiazaminsajid.coronaupdate.Model.DistrictModel;
 import com.imtiazaminsajid.coronaupdate.R;
 import com.imtiazaminsajid.coronaupdate.api_interface.ApiDataInterface;
 import com.imtiazaminsajid.coronaupdate.databinding.FragmentBangladeshDetailBinding;
@@ -77,6 +79,20 @@ public class BangladeshDetailFragment extends Fragment {
 
         getDataFromApi();
 
+        fragmentBangladeshDetailBinding.searchViewDistrict.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterData(query,bangladeshAllDataModel.getDistricts());
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterData(newText,bangladeshAllDataModel.getDistricts());
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -88,7 +104,7 @@ public class BangladeshDetailFragment extends Fragment {
 
     public void setAdapter() {
         layoutManager = new LinearLayoutManager(getContext());
-        districtDetailsAdapter = new DistrictDetailsAdapter(getContext(), bangladeshAllDataModel);
+        districtDetailsAdapter = new DistrictDetailsAdapter(getContext(), bangladeshAllDataModel.getDistricts());
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setLayoutManager(layoutManager);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setAdapter(districtDetailsAdapter);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setNestedScrollingEnabled(false);
@@ -246,6 +262,22 @@ public class BangladeshDetailFragment extends Fragment {
 
 
         fragmentBangladeshDetailBinding.totalBdAnyChartView.setChart(venn);
+    }
+
+
+    private void filterData(String query, List<DistrictModel> models) {
+        final String lowerCaseQuery = query.toLowerCase();
+
+        final List<DistrictModel> filteredModelList = new ArrayList<>();
+        for (DistrictModel model : models) {
+            final String text = model.getName().toLowerCase();
+            if (text.contains(lowerCaseQuery)) {
+                filteredModelList.add(model);
+            }
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        districtDetailsAdapter.setDistrictModels(filteredModelList);
     }
 }
 

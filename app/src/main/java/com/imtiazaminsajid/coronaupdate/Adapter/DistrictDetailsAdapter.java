@@ -12,17 +12,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imtiazaminsajid.coronaupdate.Model.BangladeshAllDataModel;
+import com.imtiazaminsajid.coronaupdate.Model.DistrictModel;
 import com.imtiazaminsajid.coronaupdate.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DistrictDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    BangladeshAllDataModel bangladeshAllDataModel;
+    List<DistrictModel> districtModels = new ArrayList<>();
 
 
-    public DistrictDetailsAdapter(Context context, BangladeshAllDataModel bangladeshAllDataModel) {
+    public DistrictDetailsAdapter(Context context, List<DistrictModel> districtModels) {
         this.context = context;
-        this.bangladeshAllDataModel = bangladeshAllDataModel;
+        this.districtModels = districtModels;
+    }
+
+    public List<DistrictModel> getDistrictModels() {
+        return districtModels;
+    }
+
+    public void setDistrictModels(List<DistrictModel> districtModels) {
+        this.districtModels = districtModels;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -38,16 +51,16 @@ public class DistrictDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         if (holder instanceof DistrictViewHolder) {
             DistrictViewHolder mHolder = (DistrictViewHolder) holder;
-            mHolder.index.setText(""+bangladeshAllDataModel.getDistricts().get(position).getId());
-            mHolder.districtName.setText(""+bangladeshAllDataModel.getDistricts().get(position).getName());
-            mHolder.districtTotalConfirmed.setText(""+bangladeshAllDataModel.getDistricts().get(position).getConfirmed());
-            mHolder.districtTotalDeath.setText(""+bangladeshAllDataModel.getDistricts().get(position).getDeaths());
+            mHolder.index.setText(""+districtModels.get(position).getId());
+            mHolder.districtName.setText(""+districtModels.get(position).getName());
+            mHolder.districtTotalConfirmed.setText(""+districtModels.get(position).getConfirmed());
+            mHolder.districtTotalDeath.setText(""+districtModels.get(position).getDeaths());
         }
     }
 
     @Override
     public int getItemCount() {
-        return bangladeshAllDataModel.getDistricts().size();
+        return districtModels.size();
     }
 
     public class DistrictViewHolder extends RecyclerView.ViewHolder {
