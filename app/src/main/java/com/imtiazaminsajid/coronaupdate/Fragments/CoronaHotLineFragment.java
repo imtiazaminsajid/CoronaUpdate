@@ -57,12 +57,16 @@ public class CoronaHotLineFragment extends Fragment {
         fragmentCoronaHotLineBinding.healthLineIcon.startAnimation(animation);
         fragmentCoronaHotLineBinding.nationalCallCenterIcon.startAnimation(animation);
         fragmentCoronaHotLineBinding.nationalHelplineIcon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.iedcr2Icon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.iedcr3Icon.startAnimation(animation);
+        fragmentCoronaHotLineBinding.iedcr4Icon.startAnimation(animation);
 
         return view;
     }
 
 
     private void makeCall() {
+
         fragmentCoronaHotLineBinding.nationalCallCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +128,47 @@ public class CoronaHotLineFragment extends Fragment {
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     String number = "109";
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + number));
+                    startActivity(intent);
+                } else {
+                    requestStoragePermission();
+                }
+            }
+        });
+
+        fragmentCoronaHotLineBinding.iedcr2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    String number = "+8801944333222";
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + number));
+                    startActivity(intent);
+                } else {
+                    requestStoragePermission();
+                }
+            }
+        });
+
+        fragmentCoronaHotLineBinding.iedcr3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    String number = "+8801937000011";
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + number));
+                    startActivity(intent);
+                } else {
+                    requestStoragePermission();
+                }
+            }
+        });
+        fragmentCoronaHotLineBinding.iedcr4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    String number = "+8801937110011";
                     Intent intent = new Intent(Intent.ACTION_CALL);
                     intent.setData(Uri.parse("tel:" + number));
                     startActivity(intent);
