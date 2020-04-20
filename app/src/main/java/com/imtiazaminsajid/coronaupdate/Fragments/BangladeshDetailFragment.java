@@ -31,10 +31,12 @@ import com.anychart.enums.LegendLayout;
 import com.imtiazaminsajid.coronaupdate.Adapter.DistrictDetailsAdapter;
 import com.imtiazaminsajid.coronaupdate.Model.BangladeshAllDataModel;
 import com.imtiazaminsajid.coronaupdate.Model.DistrictModel;
+import com.imtiazaminsajid.coronaupdate.NewModel.AllCountryData;
 import com.imtiazaminsajid.coronaupdate.R;
 import com.imtiazaminsajid.coronaupdate.api_interface.ApiDataInterface;
 import com.imtiazaminsajid.coronaupdate.databinding.FragmentBangladeshDetailBinding;
 import com.imtiazaminsajid.coronaupdate.utils.ApiClient;
+import com.imtiazaminsajid.coronaupdate.utils.ApiClientForAllCountry;
 import com.imtiazaminsajid.coronaupdate.utils.Utils;
 
 import java.text.DateFormat;
@@ -67,6 +69,8 @@ public class BangladeshDetailFragment extends Fragment {
 
     View view;
 
+    List<AllCountryData> allCountryData = new ArrayList<>();
+
     public BangladeshDetailFragment() {
     }
 
@@ -81,6 +85,8 @@ public class BangladeshDetailFragment extends Fragment {
 
         setAdapter();
         getDataFromApi();
+
+//        getAllCountryDataFromApi();
 
         Animation animation  = AnimationUtils.loadAnimation(getContext(), R.anim.blink_anim);
         fragmentBangladeshDetailBinding.lastUpdatedData.startAnimation(animation);
@@ -267,5 +273,45 @@ public class BangladeshDetailFragment extends Fragment {
         }
         districtDetailsAdapter.setDistrictModels(filteredModelList);
     }
+
+
+
+    private void getAllCountryDataFromApi() {
+
+        if (Utils.checkInternetConnection(getContext())) {
+            retrofit = ApiClientForAllCountry.getRetrofitInstance();
+            ApiDataInterface apiDataInterface = retrofit.create(ApiDataInterface.class);
+            Call call = apiDataInterface.getAllCountryData();
+            call.enqueue(new Callback<List<AllCountryData>>() {
+                @Override
+                public void onResponse(Call<List<AllCountryData>> call, Response<List<AllCountryData>> response) {
+
+                    if (response.isSuccessful()) {
+                        Log.d("allCountryData", "allCountryData "+response.code());
+//                        fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.GONE);
+                        allCountryData = response.body();
+
+//                        agesVennChart();
+//                        if (bangladeshAllDataModel!=null){
+//                            districtDetailsAdapter.setDistrictModels(bangladeshAllDataModel.getDistricts());
+//                            agesPieChart();
+//                            setOtherData();
+//                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<AllCountryData>> call, Throwable t) {
+//                    fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.VISIBLE);
+                    Log.d("allCountryData", "allCountryData "+t.getMessage());
+                }
+            });
+
+        } else {
+            alaerDialog();
+        }
+
+    }
+
 }
 

@@ -16,10 +16,14 @@ import android.view.ViewGroup;
 import com.imtiazaminsajid.coronaupdate.Adapter.WorldCountryCoronaAdapter;
 import com.imtiazaminsajid.coronaupdate.Model.WorldAllCountryModel;
 import com.imtiazaminsajid.coronaupdate.Model.WorldDatumModel;
+import com.imtiazaminsajid.coronaupdate.NewModel.AllCountryData;
 import com.imtiazaminsajid.coronaupdate.R;
+import com.imtiazaminsajid.coronaupdate.api_interface.ApiDataInterface;
 import com.imtiazaminsajid.coronaupdate.api_interface.WorldCountryDataInterface;
 import com.imtiazaminsajid.coronaupdate.databinding.FragmentTotalWorldUpdateBinding;
+import com.imtiazaminsajid.coronaupdate.utils.ApiClientForAllCountry;
 import com.imtiazaminsajid.coronaupdate.utils.ApiClintForWorldCountry;
+import com.imtiazaminsajid.coronaupdate.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +51,8 @@ public class TotalWorldUpdateFragment extends Fragment {
 
     View view;
 
+    List<AllCountryData> allCountryData = new ArrayList<>();
+
     public TotalWorldUpdateFragment() {
     }
 
@@ -57,22 +63,24 @@ public class TotalWorldUpdateFragment extends Fragment {
         view = fragmentTotalWorldUpdateBinding.getRoot();
 
         setAdapter();
-        getWorldCountryDataFromApi();
+//        getWorldCountryDataFromApi();
+
+        getAllCountryDataFromApi();
 
         fragmentTotalWorldUpdateBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if (worldAllCountryModel.getData()!=null) {
-                    filterData(query, worldAllCountryModel.getData());
+                if (allCountryData!=null) {
+                    filterData(query, allCountryData);
                 }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (worldAllCountryModel.getData()!=null) {
-                    filterData(newText, worldAllCountryModel.getData());
+                if (allCountryData!=null) {
+                    filterData(newText, allCountryData);
                 }
                 return false;
             }
@@ -122,7 +130,7 @@ public class TotalWorldUpdateFragment extends Fragment {
 
     public void setAdapter() {
         layoutManager = new LinearLayoutManager(getContext());
-        worldCountryCoronaAdapter = new WorldCountryCoronaAdapter(getContext(), worldDatumModels);
+        worldCountryCoronaAdapter = new WorldCountryCoronaAdapter(getContext(), allCountryData);
         fragmentTotalWorldUpdateBinding.worldCountryRecycleView.setLayoutManager(layoutManager);
         fragmentTotalWorldUpdateBinding.worldCountryRecycleView.setAdapter(worldCountryCoronaAdapter);
     }
@@ -140,18 +148,59 @@ public class TotalWorldUpdateFragment extends Fragment {
         return filteredModelList;
     }
 
-    private void filterData(String query, List<WorldDatumModel> models) {
+    private void filterData(String query, List<AllCountryData> models) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<WorldDatumModel> filteredModelList = new ArrayList<>();
-        for (WorldDatumModel model : models) {
-            final String text = model.getCountryName().toLowerCase();
+        final List<AllCountryData> filteredModelList = new ArrayList<>();
+        for (AllCountryData model : models) {
+            final String text = model.getCountry().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }
         }
 
         //calling a method of the adapter class and passing the filtered list
-        worldCountryCoronaAdapter.setWorldDatumModels(filteredModelList);
+        worldCountryCoronaAdapter.setAllCountryData(filteredModelList);
+    }
+
+
+    private void getAllCountryDataFromApi() {
+
+        if (Utils.checkInternetConnection(getContext())) {
+            retrofit = ApiClientForAllCountry.getRetrofitInstance();
+            ApiDataInterface apiDataInterface = retrofit.create(ApiDataInterface.class);
+            Call call = apiDataInterface.getAllCountryData();
+            call.enqueue(new Callback<List<AllCountryData>>() {
+                @Override
+                public void onResponse(Call<List<AllCountryData>> call, Response<List<AllCountryData>> response) {
+
+                    if (response.isSuccessful()) {
+                        Log.d("allCountryData", "allCountryData "+response.code());
+                        fragmentTotalWorldUpdateBinding.worldCountryProgressBar.setVisibility(View.GONE);
+                        allCountryData = response.body();
+
+                        if (allCountryData!=null) {
+                            worldCountryCoronaAdapter.setAllCountryData(allCountryData);
+                        }
+
+//                        agesVennChart();
+//                        if (bangladeshAllDataModel!=null){
+//                            districtDetailsAdapter.setDistrictModels(bangladeshAllDataModel.getDistricts());
+//                            agesPieChart();
+//                            setOtherData();
+//                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<AllCountryData>> call, Throwable t) {
+//                    fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.VISIBLE);
+                    Log.d("allCountryData", "allCountryData "+t.getMessage());
+                }
+            });
+
+        } else {
+        }
+
     }
 }
