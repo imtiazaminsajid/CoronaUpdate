@@ -71,7 +71,7 @@ public class TotalWorldUpdateFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if (allCountryData!=null) {
+                if (allCountryData != null) {
                     filterData(query, allCountryData);
                 }
                 return false;
@@ -79,13 +79,12 @@ public class TotalWorldUpdateFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (allCountryData!=null) {
+                if (allCountryData != null) {
                     filterData(newText, allCountryData);
                 }
                 return false;
             }
         });
-
 
 
         return view;
@@ -113,7 +112,7 @@ public class TotalWorldUpdateFragment extends Fragment {
                     worldAllCountryModel = response.body();
 
 //                    worldCountryCoronaAdapter.notifyDataSetChanged();
-                    if (worldAllCountryModel!=null) {
+                    if (worldAllCountryModel != null) {
 //                        worldCountryCoronaAdapter.notifyDataSetChanged();
                         worldCountryCoronaAdapter.setWorldDatumModels(worldAllCountryModel.getData());
                     }
@@ -175,27 +174,19 @@ public class TotalWorldUpdateFragment extends Fragment {
                 public void onResponse(Call<List<AllCountryData>> call, Response<List<AllCountryData>> response) {
 
                     if (response.isSuccessful()) {
-                        Log.d("allCountryData", "allCountryData "+response.code());
+                        Log.d("allCountryData", "allCountryData " + response.code());
                         fragmentTotalWorldUpdateBinding.worldCountryProgressBar.setVisibility(View.GONE);
                         allCountryData = response.body();
 
-                        if (allCountryData!=null) {
+                        if (allCountryData != null) {
                             worldCountryCoronaAdapter.setAllCountryData(allCountryData);
                         }
-
-//                        agesVennChart();
-//                        if (bangladeshAllDataModel!=null){
-//                            districtDetailsAdapter.setDistrictModels(bangladeshAllDataModel.getDistricts());
-//                            agesPieChart();
-//                            setOtherData();
-//                        }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<AllCountryData>> call, Throwable t) {
-//                    fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.VISIBLE);
-                    Log.d("allCountryData", "allCountryData "+t.getMessage());
+                    fragmentTotalWorldUpdateBinding.worldCountryProgressBar.setVisibility(View.VISIBLE);
                 }
             });
 
