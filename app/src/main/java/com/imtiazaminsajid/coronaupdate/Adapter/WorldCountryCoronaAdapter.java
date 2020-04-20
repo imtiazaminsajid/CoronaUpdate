@@ -77,8 +77,8 @@ public class WorldCountryCoronaAdapter extends RecyclerView.Adapter<RecyclerView
                 mHolder.world_country_name.setText("" + allCountryData.get(position).getCountry());
                 mHolder.total_cases.setText("" + allCountryData.get(position).getCases());
                 mHolder.new_cases.setText("" + allCountryData.get(position).getTodayCases());
-                mHolder.total_death.setText("" + allCountryData.get(position).getTodayDeaths());
-                mHolder.new_death.setText("" + allCountryData.get(position).getDeaths());
+                mHolder.total_death.setText("" + allCountryData.get(position).getDeaths());
+                mHolder.new_death.setText("" + allCountryData.get(position).getTodayDeaths());
                 mHolder.total_recovered.setText("" + allCountryData.get(position).getRecovered());
                 mHolder.active_cases.setText("" + allCountryData.get(position).getActive());
                 mHolder.critical_cases.setText("" + allCountryData.get(position).getCritical());
