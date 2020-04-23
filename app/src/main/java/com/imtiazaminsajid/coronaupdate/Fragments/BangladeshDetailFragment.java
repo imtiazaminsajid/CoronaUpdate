@@ -39,10 +39,12 @@ import com.imtiazaminsajid.coronaupdate.utils.ApiClient;
 import com.imtiazaminsajid.coronaupdate.utils.ApiClientForAllCountry;
 import com.imtiazaminsajid.coronaupdate.utils.Utils;
 
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -118,7 +120,7 @@ public class BangladeshDetailFragment extends Fragment {
 
     public void setAdapter() {
         layoutManager = new LinearLayoutManager(getContext());
-        districtDetailsAdapter = new DistrictDetailsAdapter(getContext(), districtModels);
+        districtDetailsAdapter = new DistrictDetailsAdapter(getContext());
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setLayoutManager(layoutManager);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setAdapter(districtDetailsAdapter);
         fragmentBangladeshDetailBinding.destrictDetailsRecycleView.setNestedScrollingEnabled(false);
@@ -128,13 +130,14 @@ public class BangladeshDetailFragment extends Fragment {
         fragmentBangladeshDetailBinding.totalConfirmed.setText("" + bangladeshAllDataModel.getTotal().getConfirmed());
         fragmentBangladeshDetailBinding.totalRecovered.setText("" + bangladeshAllDataModel.getTotal().getRecovered());
         fragmentBangladeshDetailBinding.totalDeaths.setText("" + bangladeshAllDataModel.getTotal().getDeaths());
+        fragmentBangladeshDetailBinding.totaltested.setText("" + bangladeshAllDataModel.getTotal().getTested());
 
         fragmentBangladeshDetailBinding.todayConfirmed.setText("" + bangladeshAllDataModel.getToday().getTodayConfirmed());
         fragmentBangladeshDetailBinding.todayDeaths.setText("" + bangladeshAllDataModel.getToday().getTodayDeaths());
         fragmentBangladeshDetailBinding.todayRecovered.setText("" + bangladeshAllDataModel.getToday().getTodayRecovered());
+        fragmentBangladeshDetailBinding.todayTested.setText("" + bangladeshAllDataModel.getToday().getTodayTested());
 
-        fragmentBangladeshDetailBinding.lastUpdatedData.setText("Last updated data: " + bangladeshAllDataModel.getLastUpdate());
-
+        fragmentBangladeshDetailBinding.lastUpdatedData.setText(bangladeshAllDataModel.getLastUpdate());
 
     }
 
@@ -147,6 +150,8 @@ public class BangladeshDetailFragment extends Fragment {
             call.enqueue(new Callback<BangladeshAllDataModel>() {
                 @Override
                 public void onResponse(Call<BangladeshAllDataModel> call, Response<BangladeshAllDataModel> response) {
+
+                    Log.d("BangladeshAllDataModel", "api "+response.code());
 
                     if (response.isSuccessful()) {
 //                        fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.GONE);
@@ -164,6 +169,7 @@ public class BangladeshDetailFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<BangladeshAllDataModel> call, Throwable t) {
+                    Log.d("BangladeshAllDataModel", "api "+t.getMessage());
 //                    fragmentBangladeshDetailBinding.destrictDetailsProgressBar.setVisibility(View.VISIBLE);
                 }
             });

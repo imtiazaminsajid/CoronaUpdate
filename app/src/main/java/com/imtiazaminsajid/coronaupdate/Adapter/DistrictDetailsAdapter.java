@@ -24,7 +24,7 @@ public class DistrictDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     List<DistrictModel> districtModels = new ArrayList<>();
 
 
-    public DistrictDetailsAdapter(Context context, List<DistrictModel> districtModels) {
+    public DistrictDetailsAdapter(Context context) {
         this.context = context;
         this.districtModels = districtModels;
     }
@@ -52,7 +52,7 @@ public class DistrictDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (holder instanceof DistrictViewHolder) {
             DistrictViewHolder mHolder = (DistrictViewHolder) holder;
             if (districtModels!=null) {
-                mHolder.index.setText("" + districtModels.get(position).getId());
+                mHolder.index.setText("" + (position+1));
                 mHolder.districtName.setText("" + districtModels.get(position).getName());
                 mHolder.districtTotalConfirmed.setText("" + districtModels.get(position).getConfirmed());
                 mHolder.districtTotalDeath.setText("" + districtModels.get(position).getDeaths());

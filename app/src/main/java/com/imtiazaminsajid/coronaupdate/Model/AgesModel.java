@@ -4,114 +4,81 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AgesModel {
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("onetoten")
     @Expose
-    private String onetoten;
-    @SerializedName("tentotwenty")
+    private OnetotenModel onetoten;
+    @SerializedName("eleventotwenty")
     @Expose
-    private String tentotwenty;
-    @SerializedName("twentytothirty")
+    private EleventotwentyModel eleventotwenty;
+    @SerializedName("twentyonetothirty")
     @Expose
-    private String twentytothirty;
-    @SerializedName("thirtytoforty")
+    private TwentyonetothirtyModel twentyonetothirty;
+    @SerializedName("thirtyonetofourty")
     @Expose
-    private String thirtytoforty;
-    @SerializedName("fortytofifty")
+    private ThirtyonetofourtyModel thirtyonetofourty;
+    @SerializedName("fourtyonetofifty")
     @Expose
-    private String fortytofifty;
-    @SerializedName("fiftytosixty")
+    private FourtyonetofiftyModel fourtyonetofifty;
+    @SerializedName("fiftyonetosixty")
     @Expose
-    private String fiftytosixty;
+    private FiftyonetosixtyModel fiftyonetosixty;
     @SerializedName("sixtyplus")
     @Expose
-    private String sixtyplus;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
+    private SixtyplusModel sixtyplus;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getOnetoten() {
+    public OnetotenModel getOnetoten() {
         return onetoten;
     }
 
-    public void setOnetoten(String onetoten) {
+    public void setOnetoten(OnetotenModel onetoten) {
         this.onetoten = onetoten;
     }
 
-    public String getTentotwenty() {
-        return tentotwenty;
+    public EleventotwentyModel getEleventotwenty() {
+        return eleventotwenty;
     }
 
-    public void setTentotwenty(String tentotwenty) {
-        this.tentotwenty = tentotwenty;
+    public void setEleventotwenty(EleventotwentyModel eleventotwenty) {
+        this.eleventotwenty = eleventotwenty;
     }
 
-    public String getTwentytothirty() {
-        return twentytothirty;
+    public TwentyonetothirtyModel getTwentyonetothirty() {
+        return twentyonetothirty;
     }
 
-    public void setTwentytothirty(String twentytothirty) {
-        this.twentytothirty = twentytothirty;
+    public void setTwentyonetothirty(TwentyonetothirtyModel twentyonetothirty) {
+        this.twentyonetothirty = twentyonetothirty;
     }
 
-    public String getThirtytoforty() {
-        return thirtytoforty;
+    public ThirtyonetofourtyModel getThirtyonetofourty() {
+        return thirtyonetofourty;
     }
 
-    public void setThirtytoforty(String thirtytoforty) {
-        this.thirtytoforty = thirtytoforty;
+    public void setThirtyonetofourty(ThirtyonetofourtyModel thirtyonetofourty) {
+        this.thirtyonetofourty = thirtyonetofourty;
     }
 
-    public String getFortytofifty() {
-        return fortytofifty;
+    public FourtyonetofiftyModel getFourtyonetofifty() {
+        return fourtyonetofifty;
     }
 
-    public void setFortytofifty(String fortytofifty) {
-        this.fortytofifty = fortytofifty;
+    public void setFourtyonetofifty(FourtyonetofiftyModel fourtyonetofifty) {
+        this.fourtyonetofifty = fourtyonetofifty;
     }
 
-    public String getFiftytosixty() {
-        return fiftytosixty;
+    public FiftyonetosixtyModel getFiftyonetosixty() {
+        return fiftyonetosixty;
     }
 
-    public void setFiftytosixty(String fiftytosixty) {
-        this.fiftytosixty = fiftytosixty;
+    public void setFiftyonetosixty(FiftyonetosixtyModel fiftyonetosixty) {
+        this.fiftyonetosixty = fiftyonetosixty;
     }
 
-    public String getSixtyplus() {
+    public SixtyplusModel getSixtyplus() {
         return sixtyplus;
     }
 
-    public void setSixtyplus(String sixtyplus) {
+    public void setSixtyplus(SixtyplusModel sixtyplus) {
         this.sixtyplus = sixtyplus;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

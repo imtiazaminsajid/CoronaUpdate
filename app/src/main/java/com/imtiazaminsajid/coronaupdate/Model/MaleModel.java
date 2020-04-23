@@ -3,49 +3,49 @@ package com.imtiazaminsajid.coronaupdate.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TotalModel {
-    @SerializedName("confirmed")
-    @Expose
-    private Integer confirmed;
-    @SerializedName("recovered")
-    @Expose
-    private Integer recovered;
-    @SerializedName("deaths")
-    @Expose
-    private Integer deaths;
+public class MaleModel {
     @SerializedName("tested")
     @Expose
-    private Integer tested;
+    private String tested;
+    @SerializedName("confirmed")
+    @Expose
+    private String confirmed;
+    @SerializedName("recovered")
+    @Expose
+    private String recovered;
+    @SerializedName("deaths")
+    @Expose
+    private String deaths;
 
-    public Integer getTested() {
+    public String getTested() {
         return tested;
     }
 
-    public void setTested(Integer tested) {
+    public void setTested(String tested) {
         this.tested = tested;
     }
 
-    public Integer getConfirmed() {
+    public String getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(Integer confirmed) {
+    public void setConfirmed(String confirmed) {
         this.confirmed = confirmed;
     }
 
-    public Integer getRecovered() {
+    public String getRecovered() {
         return recovered;
     }
 
-    public void setRecovered(Integer recovered) {
+    public void setRecovered(String recovered) {
         this.recovered = recovered;
     }
 
-    public Integer getDeaths() {
+    public String getDeaths() {
         return deaths;
     }
 
-    public void setDeaths(Integer deaths) {
+    public void setDeaths(String deaths) {
         this.deaths = deaths;
     }
 }

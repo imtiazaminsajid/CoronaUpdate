@@ -6,24 +6,22 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class BangladeshAllDataModel {
+
     @SerializedName("total")
     @Expose
     private TotalModel total;
-    @SerializedName("new")
-    @Expose
-    private NewModel _new;
     @SerializedName("today")
     @Expose
     private TodayModel today;
-    @SerializedName("last7Days")
+    @SerializedName("new")
     @Expose
-    private Last7DaysModel last7Days;
-    @SerializedName("lastMonth")
+    private NewModel _new;
+    @SerializedName("lastUpdate")
     @Expose
-    private LastMonthModel lastMonth;
+    private String lastUpdate;
     @SerializedName("details")
     @Expose
-    private List<DetailModel> details = null;
+    private List<DetailModel> details;
     @SerializedName("genders")
     @Expose
     private GendersModel genders;
@@ -32,10 +30,7 @@ public class BangladeshAllDataModel {
     private AgesModel ages;
     @SerializedName("districts")
     @Expose
-    private List<DistrictModel> districts = null;
-    @SerializedName("lastUpdate")
-    @Expose
-    private String lastUpdate;
+    private List<DistrictModel> districts;
 
     public TotalModel getTotal() {
         return total;
@@ -59,22 +54,6 @@ public class BangladeshAllDataModel {
 
     public void setToday(TodayModel today) {
         this.today = today;
-    }
-
-    public Last7DaysModel getLast7Days() {
-        return last7Days;
-    }
-
-    public void setLast7Days(Last7DaysModel last7Days) {
-        this.last7Days = last7Days;
-    }
-
-    public LastMonthModel getLastMonth() {
-        return lastMonth;
-    }
-
-    public void setLastMonth(LastMonthModel lastMonth) {
-        this.lastMonth = lastMonth;
     }
 
     public List<DetailModel> getDetails() {

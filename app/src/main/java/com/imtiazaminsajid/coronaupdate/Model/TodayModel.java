@@ -13,6 +13,17 @@ public class TodayModel {
     @SerializedName("todayDeaths")
     @Expose
     private Integer todayDeaths;
+    @SerializedName("todayTested")
+    @Expose
+    private Integer todayTested;
+
+    public Integer getTodayTested() {
+        return todayTested;
+    }
+
+    public void setTodayTested(Integer todayTested) {
+        this.todayTested = todayTested;
+    }
 
     public Integer getTodayConfirmed() {
         return todayConfirmed;

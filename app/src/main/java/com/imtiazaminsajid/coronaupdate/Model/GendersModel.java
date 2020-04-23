@@ -4,59 +4,26 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GendersModel {
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("male")
     @Expose
-    private String male;
+    private MaleModel male;
     @SerializedName("female")
     @Expose
-    private String female;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
+    private FemaleModel female;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMale() {
+    public MaleModel getMale() {
         return male;
     }
 
-    public void setMale(String male) {
+    public void setMale(MaleModel male) {
         this.male = male;
     }
 
-    public String getFemale() {
+    public FemaleModel getFemale() {
         return female;
     }
 
-    public void setFemale(String female) {
+    public void setFemale(FemaleModel female) {
         this.female = female;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

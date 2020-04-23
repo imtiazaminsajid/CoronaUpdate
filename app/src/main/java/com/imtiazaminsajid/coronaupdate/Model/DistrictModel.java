@@ -4,12 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class DistrictModel {
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("bnname")
+    @Expose
+    private String bnname;
+    @SerializedName("tested")
+    @Expose
+    private String tested;
     @SerializedName("confirmed")
     @Expose
     private String confirmed;
@@ -19,19 +22,21 @@ public class DistrictModel {
     @SerializedName("deaths")
     @Expose
     private String deaths;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
 
-    public Integer getId() {
-        return id;
+    public String getBnname() {
+        return bnname;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBnname(String bnname) {
+        this.bnname = bnname;
+    }
+
+    public String getTested() {
+        return tested;
+    }
+
+    public void setTested(String tested) {
+        this.tested = tested;
     }
 
     public String getName() {
@@ -64,21 +69,5 @@ public class DistrictModel {
 
     public void setDeaths(String deaths) {
         this.deaths = deaths;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

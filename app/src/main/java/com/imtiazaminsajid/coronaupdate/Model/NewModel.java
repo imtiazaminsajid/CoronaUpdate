@@ -16,12 +16,6 @@ public class NewModel {
     @SerializedName("deaths")
     @Expose
     private String deaths;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
 
     public Integer getId() {
         return id;
@@ -53,21 +47,5 @@ public class NewModel {
 
     public void setDeaths(String deaths) {
         this.deaths = deaths;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

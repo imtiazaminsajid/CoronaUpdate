@@ -74,8 +74,6 @@ public class LastSevenDaysFragment extends Fragment {
     private void getDataFromApi() {
 
         if (Utils.checkInternetConnection(getContext())) {
-
-
             retrofit = ApiClient.getRetrofitInstance();
             ApiDataInterface apiDataInterface = retrofit.create(ApiDataInterface.class);
             Call call = apiDataInterface.getAllBangladeshCoronaData();
@@ -97,6 +95,7 @@ public class LastSevenDaysFragment extends Fragment {
                             recoveredPieChart();
                             deathsPieChart();
                             agesPieChart();
+                            gendersPieChart();
                         }
                     }
                 }
@@ -132,38 +131,64 @@ public class LastSevenDaysFragment extends Fragment {
     }
 
     private void setAllData(){
-        fragmentLastSevenDaysBinding.confirmedTodayConfirmed.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().getToday());
-        fragmentLastSevenDaysBinding.confirmedYesterday.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().getYesterday());
-        fragmentLastSevenDaysBinding.confirmed2daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().get_2daysago());
-        fragmentLastSevenDaysBinding.confirmed3daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().get_3daysago());
-        fragmentLastSevenDaysBinding.confirmed4daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().get_4daysago());
-        fragmentLastSevenDaysBinding.confirmed5daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().get_5daysago());
-        fragmentLastSevenDaysBinding.confirmed6daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getConfirmed().get_6daysago());
+
+        fragmentLastSevenDaysBinding.confirmedTodayConfirmed.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmedYesterday.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmed2daysAgo.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmed3daysAgo.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmed4daysAgo.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmed5daysAgo.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getConfirmed());
+        fragmentLastSevenDaysBinding.confirmed6daysAgo.setText(""+bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getConfirmed());
+
+        fragmentLastSevenDaysBinding.deathsTodayConfirmed.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getDeaths()));
+        fragmentLastSevenDaysBinding.deathsYesterday.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getDeaths()));
+        fragmentLastSevenDaysBinding.deaths2daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getDeaths()));
+        fragmentLastSevenDaysBinding.deaths3daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getDeaths()));
+        fragmentLastSevenDaysBinding.deaths4daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getDeaths()));
+        fragmentLastSevenDaysBinding.deaths5daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getDeaths()));
+        fragmentLastSevenDaysBinding.deaths6daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getDeaths()));
+
+        fragmentLastSevenDaysBinding.recoveredTodayConfirmed.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getRecovered()));
+        fragmentLastSevenDaysBinding.recoveredYesterday.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getRecovered()));
+        fragmentLastSevenDaysBinding.recovered2daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getRecovered()));
+        fragmentLastSevenDaysBinding.recovered3daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getRecovered()));
+        fragmentLastSevenDaysBinding.recovered4daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getRecovered()));
+        fragmentLastSevenDaysBinding.recovered5daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getRecovered()));
+        fragmentLastSevenDaysBinding.recovered6daysAgo.setText(""+Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getRecovered()));
+
+        fragmentLastSevenDaysBinding.onetoten.setText(""+bangladeshAllDataModel.getAges().getOnetoten().getConfirmed());
+        fragmentLastSevenDaysBinding.tentotwenty.setText(""+bangladeshAllDataModel.getAges().getEleventotwenty().getConfirmed());
+        fragmentLastSevenDaysBinding.twentytothirty.setText(""+bangladeshAllDataModel.getAges().getTwentyonetothirty().getConfirmed());
+        fragmentLastSevenDaysBinding.thirtytoforty.setText(""+bangladeshAllDataModel.getAges().getThirtyonetofourty().getConfirmed());
+        fragmentLastSevenDaysBinding.fortytofifty.setText(""+bangladeshAllDataModel.getAges().getFourtyonetofifty().getConfirmed());
+        fragmentLastSevenDaysBinding.fiftytosixty.setText(""+bangladeshAllDataModel.getAges().getFiftyonetosixty().getConfirmed());
+        fragmentLastSevenDaysBinding.sixtyplus.setText(""+bangladeshAllDataModel.getAges().getSixtyplus().getConfirmed());
 
 
-        fragmentLastSevenDaysBinding.recoveredTodayConfirmed.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().getToday());
-        fragmentLastSevenDaysBinding.recoveredYesterday.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().getYesterday());
-        fragmentLastSevenDaysBinding.recovered2daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_2daysago());
-        fragmentLastSevenDaysBinding.recovered3daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_3daysago());
-        fragmentLastSevenDaysBinding.recovered4daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_4daysago());
-        fragmentLastSevenDaysBinding.recovered5daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_5daysago());
-        fragmentLastSevenDaysBinding.recovered6daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_6daysago());
+        fragmentLastSevenDaysBinding.maleConfirmed.setText(""+(Integer.valueOf(bangladeshAllDataModel.getGenders().getMale().getConfirmed())*bangladeshAllDataModel.getTotal().getConfirmed())/100);
+        fragmentLastSevenDaysBinding.femaleConfirmed.setText(""+(Integer.valueOf(bangladeshAllDataModel.getGenders().getFemale().getConfirmed())*bangladeshAllDataModel.getTotal().getConfirmed())/100);
 
-        fragmentLastSevenDaysBinding.deathsTodayConfirmed.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().getToday());
-        fragmentLastSevenDaysBinding.deathsYesterday.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().getYesterday());
-        fragmentLastSevenDaysBinding.deaths2daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_2daysago());
-        fragmentLastSevenDaysBinding.deaths3daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_3daysago());
-        fragmentLastSevenDaysBinding.deaths4daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_4daysago());
-        fragmentLastSevenDaysBinding.deaths5daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_5daysago());
-        fragmentLastSevenDaysBinding.deaths6daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_6daysago());
 
-        fragmentLastSevenDaysBinding.onetoten.setText(""+bangladeshAllDataModel.getAges().getOnetoten());
-        fragmentLastSevenDaysBinding.tentotwenty.setText(""+bangladeshAllDataModel.getAges().getTentotwenty());
-        fragmentLastSevenDaysBinding.twentytothirty.setText(""+bangladeshAllDataModel.getAges().getTwentytothirty());
-        fragmentLastSevenDaysBinding.thirtytoforty.setText(""+bangladeshAllDataModel.getAges().getThirtytoforty());
-        fragmentLastSevenDaysBinding.fortytofifty.setText(""+bangladeshAllDataModel.getAges().getFortytofifty());
-        fragmentLastSevenDaysBinding.fiftytosixty.setText(""+bangladeshAllDataModel.getAges().getFiftytosixty());
-        fragmentLastSevenDaysBinding.sixtyplus.setText(""+bangladeshAllDataModel.getAges().getSixtyplus());
+
+
+
+
+//        fragmentLastSevenDaysBinding.recoveredTodayConfirmed.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().getToday());
+//        fragmentLastSevenDaysBinding.recoveredYesterday.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().getYesterday());
+//        fragmentLastSevenDaysBinding.recovered2daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_2daysago());
+//        fragmentLastSevenDaysBinding.recovered3daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_3daysago());
+//        fragmentLastSevenDaysBinding.recovered4daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_4daysago());
+//        fragmentLastSevenDaysBinding.recovered5daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_5daysago());
+//        fragmentLastSevenDaysBinding.recovered6daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getRecovered().get_6daysago());
+
+//        fragmentLastSevenDaysBinding.deathsTodayConfirmed.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().getToday());
+//        fragmentLastSevenDaysBinding.deathsYesterday.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().getYesterday());
+//        fragmentLastSevenDaysBinding.deaths2daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_2daysago());
+//        fragmentLastSevenDaysBinding.deaths3daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_3daysago());
+//        fragmentLastSevenDaysBinding.deaths4daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_4daysago());
+//        fragmentLastSevenDaysBinding.deaths5daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_5daysago());
+//        fragmentLastSevenDaysBinding.deaths6daysAgo.setText(""+bangladeshAllDataModel.getLast7Days().getDeaths().get_6daysago());
+
 
 
 
@@ -184,13 +209,13 @@ public class LastSevenDaysFragment extends Fragment {
 //        });
 
         List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("1-10", Integer.valueOf(bangladeshAllDataModel.getAges().getOnetoten())));
-        data.add(new ValueDataEntry("11-20", Integer.valueOf(bangladeshAllDataModel.getAges().getTentotwenty())));
-        data.add(new ValueDataEntry("21-30", Integer.valueOf(bangladeshAllDataModel.getAges().getTwentytothirty())));
-        data.add(new ValueDataEntry("31-40", Integer.valueOf(bangladeshAllDataModel.getAges().getThirtytoforty())));
-        data.add(new ValueDataEntry("41-50", Integer.valueOf(bangladeshAllDataModel.getAges().getFortytofifty())));
-        data.add(new ValueDataEntry("51-60", Integer.valueOf(bangladeshAllDataModel.getAges().getFiftytosixty())));
-        data.add(new ValueDataEntry("60+", Integer.valueOf(bangladeshAllDataModel.getAges().getSixtyplus())));
+        data.add(new ValueDataEntry("1-10", Integer.valueOf(bangladeshAllDataModel.getAges().getOnetoten().getConfirmed())));
+        data.add(new ValueDataEntry("11-20", Integer.valueOf(bangladeshAllDataModel.getAges().getEleventotwenty().getConfirmed())));
+        data.add(new ValueDataEntry("21-30", Integer.valueOf(bangladeshAllDataModel.getAges().getTwentyonetothirty().getConfirmed())));
+        data.add(new ValueDataEntry("31-40", Integer.valueOf(bangladeshAllDataModel.getAges().getThirtyonetofourty().getConfirmed())));
+        data.add(new ValueDataEntry("41-50", Integer.valueOf(bangladeshAllDataModel.getAges().getFourtyonetofifty().getConfirmed())));
+        data.add(new ValueDataEntry("51-60", Integer.valueOf(bangladeshAllDataModel.getAges().getFiftyonetosixty().getConfirmed())));
+        data.add(new ValueDataEntry("60+", Integer.valueOf(bangladeshAllDataModel.getAges().getSixtyplus().getConfirmed())));
 
         agesPie.data(data);
 
@@ -224,13 +249,13 @@ public class LastSevenDaysFragment extends Fragment {
 //        });
 
         List<DataEntry> confirmedData = new ArrayList<>();
-        confirmedData.add(new ValueDataEntry("Today", bangladeshAllDataModel.getLast7Days().getConfirmed().getToday()));
-        confirmedData.add(new ValueDataEntry("Yesterday", bangladeshAllDataModel.getLast7Days().getConfirmed().getYesterday()));
-        confirmedData.add(new ValueDataEntry("2 Days Ago", bangladeshAllDataModel.getLast7Days().getConfirmed().get_2daysago()));
-        confirmedData.add(new ValueDataEntry("3 Days Ago", bangladeshAllDataModel.getLast7Days().getConfirmed().get_3daysago()));
-        confirmedData.add(new ValueDataEntry("4 Days Ago", bangladeshAllDataModel.getLast7Days().getConfirmed().get_4daysago()));
-        confirmedData.add(new ValueDataEntry("5 Days Ago", bangladeshAllDataModel.getLast7Days().getConfirmed().get_5daysago()));
-        confirmedData.add(new ValueDataEntry("6 Days Ago", bangladeshAllDataModel.getLast7Days().getConfirmed().get_6daysago()));
+        confirmedData.add(new ValueDataEntry("Today", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("Yesterday", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("2 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("3 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("4 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("5 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getConfirmed())));
+        confirmedData.add(new ValueDataEntry("6 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getConfirmed())));
 
         confirmedPie.data(confirmedData);
 
@@ -264,13 +289,15 @@ public class LastSevenDaysFragment extends Fragment {
 //        });
 
         List<DataEntry> deathsData = new ArrayList<>();
-        deathsData.add(new ValueDataEntry("Today", bangladeshAllDataModel.getLast7Days().getDeaths().getToday()));
-        deathsData.add(new ValueDataEntry("Yesterday", bangladeshAllDataModel.getLast7Days().getDeaths().getYesterday()));
-        deathsData.add(new ValueDataEntry("2 Days Ago", bangladeshAllDataModel.getLast7Days().getDeaths().get_2daysago()));
-        deathsData.add(new ValueDataEntry("3 Days Ago", bangladeshAllDataModel.getLast7Days().getDeaths().get_3daysago()));
-        deathsData.add(new ValueDataEntry("4 Days Ago", bangladeshAllDataModel.getLast7Days().getDeaths().get_4daysago()));
-        deathsData.add(new ValueDataEntry("5 Days Ago", bangladeshAllDataModel.getLast7Days().getDeaths().get_5daysago()));
-        deathsData.add(new ValueDataEntry("6 Days Ago", bangladeshAllDataModel.getLast7Days().getDeaths().get_6daysago()));
+
+        deathsData.add(new ValueDataEntry("Today", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getDeaths())));
+        deathsData.add(new ValueDataEntry("Yesterday", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getDeaths())));
+        deathsData.add(new ValueDataEntry("2 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getDeaths())));
+        deathsData.add(new ValueDataEntry("3 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getDeaths())));
+        deathsData.add(new ValueDataEntry("4 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getDeaths())));
+        deathsData.add(new ValueDataEntry("5 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getDeaths())));
+        deathsData.add(new ValueDataEntry("6 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getDeaths())));
+
 
         deathsPie.data(deathsData);
 
@@ -304,13 +331,14 @@ public class LastSevenDaysFragment extends Fragment {
 //        });
 
         List<DataEntry> recoveredData = new ArrayList<>();
-        recoveredData.add(new ValueDataEntry("Today", bangladeshAllDataModel.getLast7Days().getRecovered().getToday()));
-        recoveredData.add(new ValueDataEntry("Yesterday", bangladeshAllDataModel.getLast7Days().getRecovered().getYesterday()));
-        recoveredData.add(new ValueDataEntry("2 Days Ago", bangladeshAllDataModel.getLast7Days().getRecovered().get_2daysago()));
-        recoveredData.add(new ValueDataEntry("3 Days Ago", bangladeshAllDataModel.getLast7Days().getRecovered().get_3daysago()));
-        recoveredData.add(new ValueDataEntry("4 Days Ago", bangladeshAllDataModel.getLast7Days().getRecovered().get_4daysago()));
-        recoveredData.add(new ValueDataEntry("5 Days Ago", bangladeshAllDataModel.getLast7Days().getRecovered().get_5daysago()));
-        recoveredData.add(new ValueDataEntry("6 Days Ago", bangladeshAllDataModel.getLast7Days().getRecovered().get_6daysago()));
+
+        recoveredData.add(new ValueDataEntry("Today", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-1).getRecovered())));
+        recoveredData.add(new ValueDataEntry("Yesterday", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-2).getRecovered())));
+        recoveredData.add(new ValueDataEntry("2 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-3).getRecovered())));
+        recoveredData.add(new ValueDataEntry("3 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-4).getRecovered())));
+        recoveredData.add(new ValueDataEntry("4 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-5).getRecovered())));
+        recoveredData.add(new ValueDataEntry("5 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-6).getRecovered())));
+        recoveredData.add(new ValueDataEntry("6 Days Ago", Integer.valueOf(bangladeshAllDataModel.getDetails().get(bangladeshAllDataModel.getDetails().size()-7).getRecovered())));
 
         recoveredPie.data(recoveredData);
 
@@ -327,5 +355,41 @@ public class LastSevenDaysFragment extends Fragment {
                 .align(Align.CENTER);
 
         fragmentLastSevenDaysBinding.recoveredAnyChartView.setChart(recoveredPie);
+    }
+
+    public void gendersPieChart(){
+        fragmentLastSevenDaysBinding.gendersAnyChartView.setProgressBar(fragmentLastSevenDaysBinding.gendersAnyChartViewProgressBar);
+
+        APIlib.getInstance().setActiveAnyChartView(fragmentLastSevenDaysBinding.gendersAnyChartView);
+
+        Pie gendersPie = AnyChart.pie();
+
+//        recoveredPie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
+//            @Override
+//            public void onClick(Event event) {
+//                Toast.makeText(getContext(), event.getData().get("x") + " Recovered " + event.getData().get("value"), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        List<DataEntry> gendersData = new ArrayList<>();
+
+        gendersData.add(new ValueDataEntry("Male", Integer.valueOf(bangladeshAllDataModel.getGenders().getMale().getConfirmed())));
+        gendersData.add(new ValueDataEntry("Female", Integer.valueOf(bangladeshAllDataModel.getGenders().getFemale().getConfirmed())));
+
+        gendersPie.data(gendersData);
+
+        gendersPie.labels().position("outside");
+
+        gendersPie.legend().title().enabled(true);
+        gendersPie.legend().title()
+                .text("Gender")
+                .padding(0d, 0d, 10d, 0d);
+
+        gendersPie.legend()
+                .position("center-bottom")
+                .itemsLayout(LegendLayout.HORIZONTAL)
+                .align(Align.CENTER);
+
+        fragmentLastSevenDaysBinding.gendersAnyChartView.setChart(gendersPie);
     }
 }
